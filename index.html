@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Fire & Smoke Detection Dashboard</title>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+    <h1>สถานะตรวจจับไฟและควัน</h1>
+    <p>MQ2: <span id="mq2">0</span></p>
+    <p>Fire Detected: <span id="fire">False</span></p>
+    <p>Smoke Detected: <span id="smoke">False</span></p>
+
+    <script>
+        const socket = io();
+
+        socket.on("status_update", (data) => {
+            document.getElementById("mq2").textContent = data.mq2.toFixed(2);
+            document.getElementById("fire").textContent = data.fire;
+            document.getElementById("smoke").textContent = data.smoke;
+        });
+    </script>
+</body>
+</html>
